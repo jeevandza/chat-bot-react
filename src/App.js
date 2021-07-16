@@ -1,31 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
+
+
 
 const SpeechRecognition = window.SpeechRecognition|| window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
 
-
 const App = () => {
-  console.log(recognition)
+  // console.log(recognition)
   const [isVoiceActive, setVoiceActive] = useState(false)
   const [chatData, setChatData] = useState([
-    {
-      type: 'human',
-      message: 'Hello'
-    },
-    {
-      type: 'bot',
-      message: 'How are you'
-    },
-    {
-      type: 'human',
-      message: 'How can i Help today'
-    },
-    {
-      type: 'bot',
-      message: 'I am doing good'
-    }
+   
   ]);
 
 const voiceHandler = ()=>{
@@ -48,6 +35,74 @@ const voiceHandler = ()=>{
     recognition.onresult = (event)  =>{
       var commnd = event.results[0][0].transcript;
       console.log(commnd)
+
+      let _chatData = [...chatData];
+
+      _chatData.push({
+        'type': 'human',
+          message: commnd
+      })
+
+      /**
+       * orginal []
+       * 
+       * 
+       * temp 1 = [...orginal]
+       * temp 1 push ({'type': 'human',})
+       * temp 1 = [{'type': 'human',}]
+       * 
+       * set orginal 
+       * 
+       * orginal replaced with temp 1
+       * 
+       * temp 2 = [... temp 1]
+       * 
+       * temp 2 =  [{'type': 'human',}]
+       * 
+       * temp 2 push ({'type': 'bot',})
+       * 
+       * temp 2 =  [{'type': 'human' }, {'type': 'bot'}]
+       * 
+       * orginal replaced with temp 2
+       * 
+       * 
+       * again press red button
+       * 
+       * temp 1 = [...orginal]
+       * temp 1 push ({'type': 'human',})
+       * temp 1 = [{'type': 'human' }, {'type': 'bot'}, {'type': 'human',}]
+       * 
+       * orginal replaced with temp 1
+       * 
+       * temp 2 = [... temp 1]
+       * 
+       * temp 2 =  [{'type': 'human' }, {'type': 'bot'}, {'type': 'human',}]
+       * 
+       * temp 2 push ({'type': 'bot',})
+       * 
+       * temp 2 =  [{'type': 'human' }, {'type': 'bot'}, {'type': 'human',}, {'type': 'bot',}]
+       * 
+       * orginal replaced with temp 2
+       * 
+       */
+
+      setChatData(_chatData)
+
+      axios.post('https://jd-dev.in/api/', {
+        "message": commnd,
+      }).then((response)=>{
+        let __chatData = [..._chatData];
+
+        __chatData.push({
+          'type': 'bot',
+            message: response.data.reply
+            
+        })
+        setChatData(__chatData)
+        const music = new Audio('https://jd-dev.in/api/' + response.data.filename)
+        music.play()
+      })
+     
       setVoiceActive(false)
     };
   }
@@ -65,7 +120,7 @@ const voiceHandler = ()=>{
         return (
           <div
             className="robotalks"
-            style={{ marginLeft: chatItem.type === 'human' ? 'auto' : '0' }}
+            style={{ marginLeft: chatItem.type === 'human' ? 'auto' : '10px' }}
           >
             <form className="form-group">
               <p>{chatItem.message}</p>
