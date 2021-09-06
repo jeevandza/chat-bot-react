@@ -1,0 +1,131 @@
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    /* height: 100vh; */
+    background-image: url("https://wallpaperaccess.com/full/1566582.jpg");
+    /* width: auto; */
+    /* width: 100vh;
+    height: 100vh; */
+    font-family: 'STIX Two Text', serif;
+}
+.chat-section{
+    height:24rem;
+    display: block;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+      width:2px;
+      -webkit-box-shadow: inset 0 0 6px rgba(2, 2, 2, 0.3); 
+      border-radius: 10px;
+    }
+}
+
+
+
+  .chat-boxes-container{
+    margin-left: 30rem;
+    margin-right: 30rem;
+    border: 20px solid rgb(242, 238, 238);
+    margin-top: 3rem;
+    background-color: white;
+    
+ 
+  }
+  .chat-boxes-container .chat-bar{
+    width: 40%;
+    margin-top: 10px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    line-height: 1rem;
+    min-height: 2rem;
+    font-size: .8rem;
+    border-radius: 1rem;
+    text-transform: capitalize;
+  }
+  .main-header{
+    display: flex;
+    justify-content: space-between;
+    // background-color: white;
+    // margin: 0;
+    border: 1px solid;
+    padding: 1rem 5rem 0;
+    
+  }
+ 
+  ul div{
+    color: #04aa6d;
+     cursor: pointer;
+
+  }
+  ul div:hover{
+    color: #fff;
+  }
+
+  .dropbtn {
+    border: none;
+   
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+  }
+  
+  .dropdown-content a {
+    color: #04aa6d;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #ddd;}
+ 
+  .header{
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    color:#f0f0f0;
+    border-bottom: 10px solid rgb(242, 238, 238);
+  }
+  h1{
+   color:rgb(242, 238, 238); ;
+  }
+  .header:hover{
+    background-color: rgb(185, 185, 222);
+    transform: 2s;
+  }
+  
+  .chat-boxes-container .home-button{
+   border: 0; 
+   border-radius: 9999999px;
+   width:  30px;
+   height: 30px;
+   position: fixed;
+   bottom: 10px;
+   left:calc(50% - 15px);
+  }  
+  .canvas{
+    position: fixed;
+    bottom: 10px;
+    left:calc(50% - 45px);
+    
+
+  }
+  .h1{
+    color: white;
+  }
+
+  
